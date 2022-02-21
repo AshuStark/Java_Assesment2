@@ -1,0 +1,177 @@
+Question -1 
+Calculate Electricity Bill 
+Given a method calculateElectricityBill() with three inputs. Write code to calculate the current bill. Include a class UserMainCode with a static method calculateElectricityBill which accepts 3 inputs .
+The return type of the output should be an integer . Create a class Main which would get the inputs and call the static method calculateElectricityBill present in the UserMainCode. 
+Input and Output Format: 
+Input consist of 3 integers. 
+First input is previous reading, second input is current reading and last input is per unit charge
+Reading Format - XXXXXAAAAA where XXXXX is consumer number and AAAAA is meter reading. Output is a single integer corresponding to the current bill. 
+Refer sample output for formatting specifications. 
+Sample Input 1: 
+ABC2012345 
+ABC2012660 
+4 
+Sample Output 1: 1260
+ Sol:-               import java.lang.String;
+                 import java.util.*;
+
+              public class Bill {
+             public static int meterReading(String input1, String input2, int input3) {
+            int n1 = Integer.parseInt(input1.substring(5, input1.length()));
+           int n2 = Integer.parseInt(input2.substring(5, input2.length()));
+            int n = Math.abs((n2 - n1) * input3);
+            return n;
+  }
+
+            public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            String s1 = sc.nextLine();
+               String s2 = sc.nextLine();
+             int n = sc.nextInt();
+            int n1 = meterReading(s1, s2, n);
+             System.out.println(n1);
+  		}
+	}
+
+
+Question-2 
+Write a program to read a string and validate whether the given string is a valid color code based on the following rules: - Must start with "#" symbol - Must contain six characters after # - It may contain alphabets from A-F or digits from 0-9 Include a class UserMainCode with a static method validateColorCode which accepts a string. The return type (integer) should return 1 if the color is as per the rules else return -1. Create a Class Main which would be used to accept a String and call the static method present in UserMainCode.
+ Input and Output Format: 
+Input consists of a string. 
+Output consists of a string (Valid or Invalid). Refer sample output for formatting specifications. Sample Input 1:
+#FF9922 
+Sample Output 1: Valid
+ Sample Input 2: #FF9(22 
+Sample Output 2: Invali
+
+Sol:-
+
+                               package com.company;
+
+				import java.util.Scanner;
+
+				public class ColorCode {
+    				public static void main(String[] args) {
+     			   Scanner s = new Scanner(System.in);
+      			  String s1 = s.next();
+        			boolean b = colorCodeValidation(s1);
+        			if (b == true)
+          			  System.out.println("Valid");
+      				  else
+            System.out.println("Invalid");
+    }
+
+    public static boolean colorCodeValidation(String s1) {
+        boolean b = false, b1 = false;
+        String s2 = s1.substring(1, s1.length());
+        if (s1.length() == 7)
+            if (s1.charAt(0) == '#')
+            b1 = true;
+        if (b1 == true)
+            for (int i = 0; i < s2.length(); i++) {
+            char c = s2.charAt(i);
+            if (c != '#') {
+                if (s2.matches("[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3}"))
+                    b = true;
+                else {
+                    b = false;
+                    break;
+                }
+            }
+        }
+        return b;
+    }
+}
+
+
+Question -3
+nCr 
+Write a program to calculate the ways in which r elements can be selected from n population, using nCr formula nCr=n!/r!(n-r)! where first input being n and second input being r. 
+Note1 : n! factorial can be achieved using given formula n!=nx(n-1)x(n-2)x..3x2x1. 
+Note2 : 0! = 1. Example 5!=5x4x3x2x1=120 Include a class UserMainCode with a static method calculateNcr which accepts two integers. The return type (integer) should return the value of nCr. Create a Class Main which would be used to accept Input elements and call the static method present in UserMainCode.
+Input and Output Format: Input consists of 2 integers. 
+The first integer corresponds to n, the second integer corresponds to r.
+ Output consists of a single Integer. 
+Refer sample output for formatting specifications.
+ Sample Input 1: 4 3
+    
+Sol:-
+
+                             class Ncr_Class {
+
+                            static int nCr(int n, int r)
+                                                          {
+				return fact(n) / (fact(r) *
+				fact(n - r));
+						}
+
+				static int fact(int n)
+							{
+					int res = 1;
+					for (int i = 2; i <= n; i++)
+					res = res * i;
+					return res;
+		}
+
+		public static void main(String[] args)
+							{
+			int n = 5, r = 3;
+			System.out.println(nCr(n, r));
+		}
+	}
+
+
+Question-4
+Validating Input Password 102.Write a code get a password as string input and validate using the rules specified below. 
+Apply following validations: 
+1. Minimum length should be 8 characters 
+2. Must contain any one of these three special characters @ or _ or #
+ 3. May contain numbers or alphabets.
+ 4. Should not start with special character or number
+ 5. Should not end with special character
+ Include a class UserMainCode with a static method validatePassword which accepts password string as input and returns an integer. The method returns 1 if the password is
+valid. Else it returns -1. Create a class Main which would get the input and call the static method validatePassword present in the UserMainCode. 
+Input and Output Format: Input consists of a string. 
+Output is a string Valid or Invalid. 
+Refer sample output for formatting specifications. 
+
+Sol:-                           import java.util.Scanner;
+
+				public class Main {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    String a = sc.next();
+    int d = 0;
+    if (a.length() >= 8) {
+      if (a.contains("#") || a.contains("@") || a.contains("_")) {
+        char c = a.charAt(0);
+        if (Character.isAlphabetic(c)) {
+          char dd = a.charAt(a.length() - 1);
+          
+          if ((Character.isAlphabetic(dd)) || (Character.isDigit(dd)))
+
+          {
+            if (a.matches(".[0-9]{1,}.")
+                || a.matches(".[a-zA-Z]{1,}.")) {
+
+              System.out.println("Valid");
+
+            } else{
+              System.out.println("Not Valid");
+            }
+          } else{
+            System.out.println("Not Valid");
+          }
+        }
+         else{
+            System.out.println("Not Valid");
+          }
+      } else{
+        System.out.println("Not Valid");
+      }
+
+    } else{
+      System.out.println("Not Valid");
+    }
+  }
+}
